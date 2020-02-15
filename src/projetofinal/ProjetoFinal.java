@@ -28,7 +28,9 @@ public class ProjetoFinal {
         // TODO code application logic here
         
         List<Disciplina> disciplina = new ArrayList<Disciplina>();
-        disciplina=leitorDisciplina("C:\\Users\\João Pedro\\Documents\\NetBeansProjects\\ProjetoFinal\\src\\projetofinal\\disciplinas.txt");
+        disciplina=leitorDisciplina("src/projetofinal/disciplinas.txt");
+        
+        
         
         
         int n = disciplina.size();

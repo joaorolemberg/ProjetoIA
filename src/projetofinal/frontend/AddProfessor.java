@@ -337,9 +337,8 @@ public class AddProfessor extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel10)
-                                .addComponent(jCheckBox1))
+                            .addComponent(jCheckBox1)
+                            .addComponent(jLabel10)
                             .addComponent(jCheckBox4)
                             .addComponent(jCheckBox9)
                             .addComponent(jCheckBox12))
@@ -586,7 +585,7 @@ public class AddProfessor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddProfessor().setVisible(true);
+                new AddProfessor(disciplina).setVisible(true);
             }
         });
     }

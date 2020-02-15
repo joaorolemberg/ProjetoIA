@@ -106,7 +106,7 @@ public class AddDisciplina extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddDisciplina().setVisible(true);
+                new AddDisciplina(disciplina).setVisible(true);
             }
         });
     }
