@@ -1,5 +1,6 @@
 package projetofinal.backend;
 
+import java.util.ArrayList;
 import projetofinal.aima.Variable;
 import java.util.List;
 
@@ -24,15 +25,32 @@ public class Professor extends Variable {
         this.preferencias = preferencias;
     }
 
-    public String getRestricaoHorario() {
+    public List<String> getRestricaoHorario() {
         return restricaoHorario;
     }
 
-    public void setRestricaoHorario(String restricaoHorario) {
-        this.restricaoHorario = restricaoHorario;
+    public String getRestricaoString() {
+        int n = this.restricaoHorario.size();
+        String temp="";
+        for (int i=0; i<n; i++) {
+            temp=temp+this.restricaoHorario.get(i)+";";
+        } 
+        return temp;
     }
 
+    
+     
+    public void setRestricaoHorario(ArrayList<String> restricaoHorario) {
+        this.restricaoHorario = restricaoHorario;
+    }
+    public void printAll(){
+        System.out.println(this.nome);
+        System.out.println(this.preferencias);
+        System.out.println(this.restricaoHorario);
+    }
+    
     private String nome;
     private List<Disciplina> preferencias;
-    private String restricaoHorario;
+    private List<String> restricaoHorario;
+    
 }

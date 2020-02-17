@@ -5,13 +5,22 @@
  */
 package projetofinal;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import projetofinal.frontend.*;
 import projetofinal.backend.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import static projetofinal.backend.ManipulaArquivo.busca3D;
+import static projetofinal.backend.ManipulaArquivo.busca4D;
+import static projetofinal.backend.ManipulaArquivo.gravarDisciplina;
+import static projetofinal.backend.ManipulaArquivo.gravarProfessor;
+
 import static projetofinal.backend.ManipulaArquivo.leitorDisciplina;
+import static projetofinal.backend.ManipulaArquivo.leitorProfessor;
+
+
 
 
 
@@ -24,21 +33,19 @@ public class ProjetoFinal {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         // TODO code application logic here
         
         List<Disciplina> disciplina = new ArrayList<Disciplina>();
+        
         disciplina=leitorDisciplina("src/projetofinal/disciplinas.txt");
-        
-        
-        
         
         int n = disciplina.size();
         for (int i=0; i<n; i++) {
             disciplina.get(i).printAll();
         }       
         new Gui(disciplina).setVisible(true);
-        
+
     }
     
 }

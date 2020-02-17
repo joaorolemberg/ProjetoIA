@@ -1,6 +1,8 @@
 package projetofinal.backend;
 
-public class Disciplina {
+import java.io.Serializable;
+
+public class Disciplina implements Serializable {
     public String getNome() {
         return nome;
     }
