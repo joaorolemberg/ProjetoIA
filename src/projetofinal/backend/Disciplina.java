@@ -33,6 +33,8 @@ public class Disciplina implements Serializable {
         System.out.println("Horario pre definido:"+this.restricaoHorario);
         
     }
+    
+    
 
     public String getCodigo() {
         return codigo;
