@@ -279,19 +279,20 @@ public class ManipulaArquivo {
         
         BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path,true));
         String guardar = null;
+        
         switch (profParam.getPreferencias().size()) {
             case 3:
-                guardar = profParam.getName()+";"+"3"+";";
+                guardar = profParam.getMatricula()+";"+profParam.getNome()+";"+"3"+";";
                 guardar=guardar+profParam.getPreferencias().get(0).getCodigo()+";"+profParam.getPreferencias().get(1).getCodigo()+";"+profParam.getPreferencias().get(2).getCodigo()+";";
                 guardar=guardar+profParam.getRestricaoHorario().size()+";"+profParam.getRestricaoString();
                 break;
             case 4:
-                guardar = profParam.getName()+";"+"4"+";";
+                guardar = profParam.getMatricula()+";"+profParam.getNome()+";"+"4"+";";
                 guardar=guardar+profParam.getPreferencias().get(0).getCodigo()+";"+profParam.getPreferencias().get(1).getCodigo()+";"+profParam.getPreferencias().get(2).getCodigo()+";"+profParam.getPreferencias().get(3).getCodigo()+";";
                 guardar=guardar+profParam.getRestricaoHorario().size()+";"+profParam.getRestricaoString();
                 break;
             case 5:
-                guardar = profParam.getName()+";"+"5"+";";
+                guardar = profParam.getMatricula()+";"+profParam.getNome()+";"+"5"+";";
                 guardar=guardar+profParam.getPreferencias().get(0).getCodigo()+";"+profParam.getPreferencias().get(1).getCodigo()+";"+profParam.getPreferencias().get(2).getCodigo()+";"+profParam.getPreferencias().get(3).getCodigo()+";"+profParam.getPreferencias().get(4).getCodigo()+";";
                 guardar=guardar+profParam.getRestricaoHorario().size()+";"+profParam.getRestricaoString();
             break;
@@ -321,16 +322,17 @@ public class ManipulaArquivo {
                     linha = buffRead.readLine();
                     
                     atributos=linha.split(";");
-                    temp.setNome(atributos[0]);
+                    temp.setMatricula(Integer.parseInt(atributos[0]));
+                    temp.setNome(atributos[1]);
                     int n = atributos.length; //-1 pq ela deve dar um split no vazio
                     int i= n;
                     List<String> restricao = new ArrayList<>();
-                    switch (Integer.parseInt(atributos[1])) {
+                    switch (Integer.parseInt(atributos[2])) {
                         
                         case 3:
-                            discD=busca3D(atributos[2],atributos[3],atributos[4],"src/projetofinal/disciplinas.txt");
+                            discD=busca3D(atributos[3],atributos[4],atributos[5],"src/projetofinal/disciplinas.txt");
                             
-                            for (i= i- Integer.parseInt(atributos[5]); i<n ; i++) {
+                            for (i= i- Integer.parseInt(atributos[6]); i<n ; i++) {
                                 
                                     restricao.add(atributos[i]);
                                     //System.out.println(atributos[i]);
@@ -344,9 +346,9 @@ public class ManipulaArquivo {
   
                         case 4:
                             
-                            discD=busca4D(atributos[2],atributos[3],atributos[4],atributos[5],"src/projetofinal/disciplinas.txt");
+                            discD=busca4D(atributos[3],atributos[4],atributos[5],atributos[6],"src/projetofinal/disciplinas.txt");
                             
-                            for (i= i- Integer.parseInt(atributos[6]); i<n ; i++) {
+                            for (i= i- Integer.parseInt(atributos[7]); i<n ; i++) {
                                 
                                     restricao.add(atributos[i]);
                          
@@ -359,9 +361,9 @@ public class ManipulaArquivo {
                             
                         case 5:
                             
-                            discD=busca5D(atributos[2],atributos[3],atributos[4],atributos[5],atributos[6],"src/projetofinal/disciplinas.txt");
+                            discD=busca5D(atributos[3],atributos[4],atributos[5],atributos[6],atributos[7],"src/projetofinal/disciplinas.txt");
                             
-                            for (i= i- Integer.parseInt(atributos[7]); i<n ; i++) {
+                            for (i= i- Integer.parseInt(atributos[8]); i<n ; i++) {
                                 
                                     restricao.add(atributos[i]);
                          
@@ -376,21 +378,13 @@ public class ManipulaArquivo {
                            break;
                     
                     }
-                    
-                    
-                    
-
-                    
-
                 }
 
                 buffRead.close();
-
-
                 return profP;
 
             }catch(Exception e ){
-                System.out.println("porra");
+                
                 System.out.println(e);
 
                 return profP;

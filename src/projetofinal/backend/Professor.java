@@ -44,13 +44,24 @@ public class Professor extends Variable {
         this.restricaoHorario = restricaoHorario;
     }
     public void printAll(){
+        System.out.println(this.matricula);
         System.out.println(this.nome);
         System.out.println(this.preferencias);
         System.out.println(this.restricaoHorario);
     }
+
+    public int getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
+    }
+    
     
     private String nome;
     private List<Disciplina> preferencias;
     private List<String> restricaoHorario;
+    private int matricula;
     
 }

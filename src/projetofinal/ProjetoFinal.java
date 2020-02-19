@@ -38,13 +38,44 @@ public class ProjetoFinal {
         
         List<Disciplina> disciplina = new ArrayList<Disciplina>();
         
+        
         disciplina=leitorDisciplina("src/projetofinal/disciplinas.txt");
         
         int n = disciplina.size();
         for (int i=0; i<n; i++) {
             disciplina.get(i).printAll();
-        }       
-        new Gui(disciplina).setVisible(true);
+        }
+        
+        List<Professor> professores = new ArrayList<>();
+        professores=leitorProfessor("src/projetofinal/ProfessorObj.txt");
+        n = professores.size();
+        for (int i=0; i<n; i++) {
+            professores.get(i).printAll();
+        }
+        
+        
+        /*
+        Professor prof1 = new Professor("joao");
+        prof1.setMatricula(2);
+        disciplina=busca3D("COMP0427","COMP0455","COMP0463","src/projetofinal/disciplinas.txt");
+        prof1.setPreferencias(disciplina);
+        List<String> restricaoHorario=new ArrayList<>();
+        restricaoHorario.add("h10");
+        restricaoHorario.add("h2");
+        restricaoHorario.add("h13");
+        prof1.setRestricaoHorario((ArrayList<String>) restricaoHorario);
+        gravarProfessor(prof1,"src/projetofinal/ProfessorObj.txt");
+        
+        List<Professor> professores = new ArrayList<>();
+        professores=leitorProfessor("src/projetofinal/ProfessorObj.txt");
+        professores.get(0).printAll();
+        professores.get(1).printAll();
+        
+        */
+        
+        
+        
+        new Gui().setVisible(true);
 
     }
     

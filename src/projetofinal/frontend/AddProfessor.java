@@ -5,9 +5,23 @@
  */
 package projetofinal.frontend;
 
+import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import projetofinal.backend.Disciplina;
+import static projetofinal.backend.ManipulaArquivo.busca3D;
+import static projetofinal.backend.ManipulaArquivo.busca4D;
+import static projetofinal.backend.ManipulaArquivo.busca5D;
+import static projetofinal.backend.ManipulaArquivo.gravarProfessor;
+import static projetofinal.backend.ManipulaArquivo.leitorProfessor;
+import projetofinal.backend.Professor;
 
 /**
  *
@@ -19,8 +33,17 @@ public class AddProfessor extends javax.swing.JFrame {
      * Creates new form addProfessor
      */
     static List<Disciplina> disciplina;
+    static List<String> horarios=new ArrayList<>();
+    static int qtdeHorarios=0;
+  
+    
     public AddProfessor(List<Disciplina> disciParam) {
         initComponents();
+        
+        
+        
+        this.setVisible(true);
+        
         comboDisciplina4.setVisible(false);
         comboDisciplina5.setVisible(false);
         
@@ -34,7 +57,7 @@ public class AddProfessor extends javax.swing.JFrame {
         
         int n = disciplina.size();
         for (int i=0; i<n; i++) {
-            String temp=disciplina.get(i).getNome()+"-"+disciplina.get(i).getDepartamento()+"-"+disciplina.get(i).getCreditos();
+            String temp=disciplina.get(i).getCodigo()+";"+disciplina.get(i).getNome()+";"+disciplina.get(i).getDepartamento()+";"+disciplina.get(i).getCreditos();
             comboDisciplina1.addItem(temp);
             comboDisciplina2.addItem(temp);
             comboDisciplina3.addItem(temp);
@@ -79,21 +102,24 @@ public class AddProfessor extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
-        jCheckBox13 = new javax.swing.JCheckBox();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jCheckBox15 = new javax.swing.JCheckBox();
+        checkH1 = new javax.swing.JCheckBox();
+        checkH3 = new javax.swing.JCheckBox();
+        checkH2 = new javax.swing.JCheckBox();
+        checkH4 = new javax.swing.JCheckBox();
+        checkH5 = new javax.swing.JCheckBox();
+        checkH6 = new javax.swing.JCheckBox();
+        checkH9 = new javax.swing.JCheckBox();
+        checkH8 = new javax.swing.JCheckBox();
+        checkH7 = new javax.swing.JCheckBox();
+        checkH12 = new javax.swing.JCheckBox();
+        checkH11 = new javax.swing.JCheckBox();
+        checkH10 = new javax.swing.JCheckBox();
+        checkH15 = new javax.swing.JCheckBox();
+        checkH14 = new javax.swing.JCheckBox();
+        checkH13 = new javax.swing.JCheckBox();
+        jLabel13 = new javax.swing.JLabel();
+        textMatricula = new javax.swing.JTextField();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,93 +195,98 @@ public class AddProfessor extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel12.setText("17:00-18:40");
 
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        checkH1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                checkH1StateChanged(evt);
+            }
+        });
+        checkH1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                checkH1ActionPerformed(evt);
             }
         });
 
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        checkH3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                checkH3ActionPerformed(evt);
             }
         });
 
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+        checkH2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
+                checkH2ActionPerformed(evt);
             }
         });
 
-        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+        checkH4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
+                checkH4ActionPerformed(evt);
             }
         });
 
-        jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+        checkH5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox5ActionPerformed(evt);
+                checkH5ActionPerformed(evt);
             }
         });
 
-        jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
+        checkH6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox6ActionPerformed(evt);
+                checkH6ActionPerformed(evt);
             }
         });
 
-        jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+        checkH9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox7ActionPerformed(evt);
+                checkH9ActionPerformed(evt);
             }
         });
 
-        jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
+        checkH8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox8ActionPerformed(evt);
+                checkH8ActionPerformed(evt);
             }
         });
 
-        jCheckBox9.addActionListener(new java.awt.event.ActionListener() {
+        checkH7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox9ActionPerformed(evt);
+                checkH7ActionPerformed(evt);
             }
         });
 
-        jCheckBox10.addActionListener(new java.awt.event.ActionListener() {
+        checkH12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox10ActionPerformed(evt);
+                checkH12ActionPerformed(evt);
             }
         });
 
-        jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
+        checkH11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox11ActionPerformed(evt);
+                checkH11ActionPerformed(evt);
             }
         });
 
-        jCheckBox12.addActionListener(new java.awt.event.ActionListener() {
+        checkH10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox12ActionPerformed(evt);
+                checkH10ActionPerformed(evt);
             }
         });
 
-        jCheckBox13.addActionListener(new java.awt.event.ActionListener() {
+        checkH15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox13ActionPerformed(evt);
+                checkH15ActionPerformed(evt);
             }
         });
 
-        jCheckBox14.addActionListener(new java.awt.event.ActionListener() {
+        checkH14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox14ActionPerformed(evt);
+                checkH14ActionPerformed(evt);
             }
         });
 
-        jCheckBox15.addActionListener(new java.awt.event.ActionListener() {
+        checkH13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox15ActionPerformed(evt);
+                checkH13ActionPerformed(evt);
             }
         });
 
@@ -271,9 +302,9 @@ public class AddProfessor extends javax.swing.JFrame {
                     .addComponent(jLabel10))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3))
+                    .addComponent(checkH1)
+                    .addComponent(checkH3)
+                    .addComponent(checkH2))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(91, Short.MAX_VALUE)
@@ -284,9 +315,9 @@ public class AddProfessor extends javax.swing.JFrame {
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jCheckBox4)
-                                    .addComponent(jCheckBox5)
-                                    .addComponent(jCheckBox6))
+                                    .addComponent(checkH4)
+                                    .addComponent(checkH5)
+                                    .addComponent(checkH6))
                                 .addGap(30, 30, 30))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,9 +328,9 @@ public class AddProfessor extends javax.swing.JFrame {
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jCheckBox7)
-                                    .addComponent(jCheckBox8)
-                                    .addComponent(jCheckBox9))))
+                                    .addComponent(checkH9)
+                                    .addComponent(checkH8)
+                                    .addComponent(checkH7))))
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -307,15 +338,15 @@ public class AddProfessor extends javax.swing.JFrame {
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox11)
-                                    .addComponent(jCheckBox12)
-                                    .addComponent(jCheckBox10))))
+                                    .addComponent(checkH11)
+                                    .addComponent(checkH10)
+                                    .addComponent(checkH12))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox13)
+                            .addComponent(checkH15)
                             .addComponent(jLabel9)
-                            .addComponent(jCheckBox14)
-                            .addComponent(jCheckBox15))
+                            .addComponent(checkH14)
+                            .addComponent(checkH13))
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -337,32 +368,44 @@ public class AddProfessor extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
+                            .addComponent(checkH1)
                             .addComponent(jLabel10)
-                            .addComponent(jCheckBox4)
-                            .addComponent(jCheckBox9)
-                            .addComponent(jCheckBox12))
+                            .addComponent(checkH4)
+                            .addComponent(checkH7)
+                            .addComponent(checkH10))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11)
-                                    .addComponent(jCheckBox5)
-                                    .addComponent(jCheckBox8)
-                                    .addComponent(jCheckBox11)
-                                    .addComponent(jCheckBox14))
+                                    .addComponent(checkH5)
+                                    .addComponent(checkH8)
+                                    .addComponent(checkH11)
+                                    .addComponent(checkH14))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
-                                    .addComponent(jCheckBox2)
-                                    .addComponent(jCheckBox6)
-                                    .addComponent(jCheckBox7)
-                                    .addComponent(jCheckBox10)
-                                    .addComponent(jCheckBox13)))
-                            .addComponent(jCheckBox3)))
-                    .addComponent(jCheckBox15))
+                                    .addComponent(checkH3)
+                                    .addComponent(checkH6)
+                                    .addComponent(checkH9)
+                                    .addComponent(checkH12)
+                                    .addComponent(checkH15)))
+                            .addComponent(checkH2)))
+                    .addComponent(checkH13))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel13.setText("Matricula:");
+        jLabel13.setToolTipText("");
+
+        btnVoltar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -372,45 +415,56 @@ public class AddProfessor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(37, 37, 37)
-                                .addComponent(qtdePref, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comboDisciplina1, 0, 472, Short.MAX_VALUE)
-                            .addComponent(comboDisciplina2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboDisciplina3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboDisciplina4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboDisciplina5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(35, 35, 35)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2)
+                        .addGap(37, 37, 37)
+                        .addComponent(qtdePref, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(422, 422, 422)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(comboDisciplina1, 0, 472, Short.MAX_VALUE)
+                                    .addComponent(comboDisciplina2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboDisciplina3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboDisciplina4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboDisciplina5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(337, 337, 337)
+                                .addComponent(botaoAddProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(42, 43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botaoAddProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(419, 419, 419))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(qtdePref, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -428,7 +482,9 @@ public class AddProfessor extends javax.swing.JFrame {
                         .addComponent(comboDisciplina5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(botaoAddProfessor)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoAddProfessor)
+                    .addComponent(btnVoltar))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -469,65 +525,175 @@ public class AddProfessor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_qtdePrefItemStateChanged
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void checkH1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+        
+        if(checkH1.isSelected()){
+            horarios.add("h1");
+            qtdeHorarios++;
+        }else{
+            qtdeHorarios--;
+            horarios.remove("h1");
+        }
+        
+       
+    }//GEN-LAST:event_checkH1ActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void checkH3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+         
+        if(checkH3.isSelected()){
+            horarios.add("h3");
+            qtdeHorarios++;
+        }else{
+            qtdeHorarios--;
+            horarios.remove("h3");
+        }
+        
+    }//GEN-LAST:event_checkH3ActionPerformed
 
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+    private void checkH2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
+        if(checkH2.isSelected()){
+            horarios.add("h2");
+            qtdeHorarios++;
+        }else{
+            qtdeHorarios--;
+            horarios.remove("h2");
+        }
+    }//GEN-LAST:event_checkH2ActionPerformed
 
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+    private void checkH4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
+        if(checkH4.isSelected()){
+            horarios.add("h4");
+            qtdeHorarios++;
+        }else{
+            qtdeHorarios--;
+            horarios.remove("h4");
+        }
+    }//GEN-LAST:event_checkH4ActionPerformed
 
-    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
+    private void checkH5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox5ActionPerformed
+        if(checkH5.isSelected()){
+            horarios.add("h5");
+            qtdeHorarios++;
+        }else{
+            qtdeHorarios--;
+            horarios.remove("h5");
+        }
+    }//GEN-LAST:event_checkH5ActionPerformed
 
-    private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
+    private void checkH6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox6ActionPerformed
+        if(checkH6.isSelected()){
+            horarios.add("h6");
+            qtdeHorarios++;
+        }else{
+            qtdeHorarios--;
+            horarios.remove("h6");
+        }
+    }//GEN-LAST:event_checkH6ActionPerformed
 
-    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
+    private void checkH9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH9ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox7ActionPerformed
+        if(checkH9.isSelected()){
+            horarios.add("h9");
+            qtdeHorarios++;
+        }else{
+            horarios.remove("h9");
+            qtdeHorarios--;
+        }
+    }//GEN-LAST:event_checkH9ActionPerformed
 
-    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
+    private void checkH8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH8ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox8ActionPerformed
+        if(checkH8.isSelected()){
+            horarios.add("h8");
+            qtdeHorarios++;
+        }else{
+            horarios.remove("h8");
+            qtdeHorarios--;
+        }
+    }//GEN-LAST:event_checkH8ActionPerformed
 
-    private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox9ActionPerformed
+    private void checkH7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox9ActionPerformed
+        if(checkH7.isSelected()){
+            horarios.add("h7");
+            qtdeHorarios++;
+        }else{
+            horarios.remove("h7");
+            qtdeHorarios--;
+        }
+    }//GEN-LAST:event_checkH7ActionPerformed
 
-    private void jCheckBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox10ActionPerformed
+    private void checkH12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH12ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox10ActionPerformed
+        if(checkH12.isSelected()){
+            horarios.add("h12");
+            qtdeHorarios++;
+        }else{
+            horarios.remove("h12");
+            qtdeHorarios--;
+        }
+    }//GEN-LAST:event_checkH12ActionPerformed
 
-    private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox11ActionPerformed
+    private void checkH11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH11ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox11ActionPerformed
+        if(checkH11.isSelected()){
+            horarios.add("h11");
+            qtdeHorarios++;
+        }else{
+            horarios.remove("h11");
+            qtdeHorarios--;
+        }
+    }//GEN-LAST:event_checkH11ActionPerformed
 
-    private void jCheckBox12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox12ActionPerformed
+    private void checkH10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH10ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox12ActionPerformed
+        if(checkH10.isSelected()){
+            horarios.add("h10");
+            qtdeHorarios++;
+        }else{
+            horarios.remove("h10");
+            qtdeHorarios--;
+        }
+    }//GEN-LAST:event_checkH10ActionPerformed
 
-    private void jCheckBox13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox13ActionPerformed
+    private void checkH15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH15ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox13ActionPerformed
+        if(checkH15.isSelected()){
+            horarios.add("h15");
+            qtdeHorarios++;
+        }else{
+            horarios.remove("h15");
+            qtdeHorarios--;
+        }
+    }//GEN-LAST:event_checkH15ActionPerformed
 
-    private void jCheckBox14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox14ActionPerformed
+    private void checkH14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH14ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox14ActionPerformed
+        if(checkH14.isSelected()){
+            horarios.add("h14");
+            qtdeHorarios++;
+        }else{
+            horarios.remove("h14");
+            qtdeHorarios--;
+        }
+    }//GEN-LAST:event_checkH14ActionPerformed
 
-    private void jCheckBox15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox15ActionPerformed
+    private void checkH13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkH13ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox15ActionPerformed
+        if(checkH13.isSelected()){
+            horarios.add("h13");
+            qtdeHorarios++;
+        }else{
+            horarios.remove("h13");
+            qtdeHorarios--;
+        }
+    }//GEN-LAST:event_checkH13ActionPerformed
 
     private void botaoAddProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddProfessorActionPerformed
         // TODO add your handling code here:
@@ -538,21 +704,269 @@ public class AddProfessor extends javax.swing.JFrame {
         int cb4=comboDisciplina4.getSelectedIndex();
         int cb5=comboDisciplina5.getSelectedIndex();
         
+        List<Professor> listaVerificacao= new ArrayList<>();
+        System.out.println(horarios);
+        
+        if(textNome.getText().equals("")){
+            JOptionPane.showMessageDialog( null , " Professor nao pode ter nome vazio" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+        }
+        
+        if(textMatricula.getText().equals("")){
+            JOptionPane.showMessageDialog( null , " Professor nao pode ter matricula vazia" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+        }
+        Professor prof = new Professor("");
+        prof.setNome(textNome.getText());
+        
+        System.out.println(textNome.getText());
+        
         if(qtdePrefs==0){
             if(cb1!=cb2 && cb1!=cb3 && cb2!=cb3){
-                //Verificacao correta
+                //Verificacao de disciplinas correta
+                if(qtdeHorarios>6){
+                    JOptionPane.showMessageDialog( null , " Professor nao pode deixar de lecionar 6 aulas" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+                }else{
+                    try {
+                        listaVerificacao=leitorProfessor("src/projetofinal/ProfessorObj.txt");
+                        int mat=Integer.parseInt(textMatricula.getText());
+                        int n=listaVerificacao.size();
+                        boolean exists=false;
+                        for (int i = 0; i < n; i++) {
+                            
+                            if(mat==listaVerificacao.get(i).getMatricula()){
+                                JOptionPane.showMessageDialog( null , " Professor nao pode ter matriculas iguais" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+                                exists=true;
+                                break;
+                            }
+                        }
+                        
+                        if(exists==false){
+                            
+                            prof.setMatricula(mat);
+                            prof.setRestricaoHorario((ArrayList<String>) horarios);
+                            
+                            //montando objetos das combobox
+                            List<Disciplina> prefs= new ArrayList<>();
+                            String discTemp = null;
+                            String disc1 = null;
+                            String disc2 = null;
+                            String disc3 = null;
+                            
+                            String[] cod;
+                            
+                            discTemp=comboDisciplina1.getItemAt(comboDisciplina1.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc1=cod[0];
+                            System.out.println(disc1);
+                            
+                            discTemp=comboDisciplina2.getItemAt(comboDisciplina2.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc2=cod[0];
+                            System.out.println(disc2);
+                            
+                            discTemp=comboDisciplina3.getItemAt(comboDisciplina3.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc3=cod[0];
+                            System.out.println(disc3);
+                            
+                            prefs=busca3D(disc1,disc2,disc3,"src/projetofinal/disciplinas.txt");
+                                                       
+                            prof.setPreferencias(prefs);
+                            prof.printAll();
+                            
+                            gravarProfessor(prof,"src/projetofinal/ProfessorObj.txt");
+                            JOptionPane.showMessageDialog( null , " Professor adicionado com sucesso!" , " Adicionado!" , JOptionPane.INFORMATION_MESSAGE );
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(AddProfessor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }else{
+                JOptionPane.showMessageDialog( null , " Professor nao pode ter preferencias iguais" , " Erro!" , JOptionPane.WARNING_MESSAGE );
                 }
         }else if(qtdePrefs==1) {
                 if(cb1!=cb2 && cb1!=cb3 && cb1!=cb4 && cb2!=cb3 && cb2!=cb4 && cb3!=cb4){
-                    //Verificacao correta
+                    //Verificacao de disciplinas correta
+                    if(qtdeHorarios>6){
+                    JOptionPane.showMessageDialog( null , " Professor nao pode deixar de lecionar 6 aulas" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+                    }else{
+                        //gravar professor e sair da tela
+                        try {
+                        listaVerificacao=leitorProfessor("src/projetofinal/ProfessorObj.txt");
+                        int mat=Integer.parseInt(textMatricula.getText());
+                        int n=listaVerificacao.size();
+                        boolean exists=false;
+                        for (int i = 0; i < n; i++) {
+                            
+                            if(mat==listaVerificacao.get(i).getMatricula()){
+                                JOptionPane.showMessageDialog( null , " Professor nao pode ter matriculas iguais" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+                                exists=true;
+                                break;
+                            }
+                        }
+                        
+                        if(exists==false){
+                            
+                            prof.setMatricula(mat);
+                            prof.setRestricaoHorario((ArrayList<String>) horarios);
+                            
+                            //montando objetos das combobox
+                            List<Disciplina> prefs= new ArrayList<>();
+                            String discTemp = null;
+                            String disc1 = null;
+                            String disc2 = null;
+                            String disc3 = null;
+                            String disc4 = null;
+                            
+                            
+                            String[] cod;
+                            
+                            discTemp=comboDisciplina1.getItemAt(comboDisciplina1.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc1=cod[0];
+                            System.out.println(disc1);
+                            
+                            discTemp=comboDisciplina2.getItemAt(comboDisciplina2.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc2=cod[0];
+                            System.out.println(disc2);
+                            
+                            discTemp=comboDisciplina3.getItemAt(comboDisciplina3.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc3=cod[0];
+                            System.out.println(disc3);
+                            
+                            discTemp=comboDisciplina4.getItemAt(comboDisciplina4.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc4=cod[0];
+                            System.out.println(disc4);
+                            
+                            prefs=busca4D(disc1,disc2,disc3,disc4,"src/projetofinal/disciplinas.txt");
+                                                       
+                            prof.setPreferencias(prefs);
+                            prof.printAll();
+                            
+                            gravarProfessor(prof,"src/projetofinal/ProfessorObj.txt");
+                            JOptionPane.showMessageDialog( null , " Professor adicionado com sucesso!" , " Adicionado!" , JOptionPane.INFORMATION_MESSAGE );
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(AddProfessor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    }
                 }else{
+                    JOptionPane.showMessageDialog( null , " Professor nao pode ter preferencias iguais" , " Erro!" , JOptionPane.WARNING_MESSAGE );
                     }
             }else {
-                
+                if(cb1!=cb2 && cb1!=cb3 && cb1!=cb4 && cb1!=cb5 && cb2!=cb3 && cb2!=cb4 && cb2!=cb5 && cb3!=cb4 && cb3!=cb5 && cb4!=cb5){
+                        //Verificacao de disciplinas correta
+                    if(qtdeHorarios>6){
+                        JOptionPane.showMessageDialog( null , " Professor nao pode deixar de lecionar 6 aulas" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+                    }else{
+                        //gravar professor e sair da tela
+                        try {
+                        listaVerificacao=leitorProfessor("src/projetofinal/ProfessorObj.txt");
+                        int mat=Integer.parseInt(textMatricula.getText());
+                        int n=listaVerificacao.size();
+                        boolean exists=false;
+                        for (int i = 0; i < n; i++) {
+                            
+                            if(mat==listaVerificacao.get(i).getMatricula()){
+                                JOptionPane.showMessageDialog( null , " Professor nao pode ter matriculas iguais" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+                                exists=true;
+                                break;
+                            }
+                        }
+                        
+                        if(exists==false){
+                            
+                            prof.setMatricula(mat);
+                            prof.setRestricaoHorario((ArrayList<String>) horarios);
+                            
+                            //montando objetos das combobox
+                            List<Disciplina> prefs= new ArrayList<>();
+                            String discTemp = null;
+                            String disc1 = null;
+                            String disc2 = null;
+                            String disc3 = null;
+                            String disc4 = null;
+                            String disc5 = null;
+                            
+                            
+                            String[] cod;
+                            
+                            discTemp=comboDisciplina1.getItemAt(comboDisciplina1.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc1=cod[0];
+                            System.out.println(disc1);
+                            
+                            discTemp=comboDisciplina2.getItemAt(comboDisciplina2.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc2=cod[0];
+                            System.out.println(disc2);
+                            
+                            discTemp=comboDisciplina3.getItemAt(comboDisciplina3.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc3=cod[0];
+                            System.out.println(disc3);
+                            
+                            discTemp=comboDisciplina4.getItemAt(comboDisciplina4.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc4=cod[0];
+                            System.out.println(disc4);
+                            
+                            discTemp=comboDisciplina5.getItemAt(comboDisciplina5.getSelectedIndex());
+                            System.out.println(discTemp);
+                            cod=discTemp.split(";");
+                            disc5=cod[0];
+                            System.out.println(disc5);
+                            
+                            prefs=busca5D(disc1,disc2,disc3,disc4,disc5,"src/projetofinal/disciplinas.txt");
+                                                       
+                            prof.setPreferencias(prefs);
+                            prof.printAll();
+                            
+                            gravarProfessor(prof,"src/projetofinal/ProfessorObj.txt");
+                            JOptionPane.showMessageDialog( null , " Professor adicionado com sucesso!" , " Adicionado!" , JOptionPane.INFORMATION_MESSAGE );
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(AddProfessor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        }
+                    
+                    }else{
+                    JOptionPane.showMessageDialog( null , " Professor nao pode ter preferencias iguais" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+                        }
+
                 }
               
     }//GEN-LAST:event_botaoAddProfessorActionPerformed
+
+    private void checkH1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkH1StateChanged
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_checkH1StateChanged
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+        try {
+            new Gui().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AddProfessor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -592,30 +1006,32 @@ public class AddProfessor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAddProfessor;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JCheckBox checkH1;
+    private javax.swing.JCheckBox checkH10;
+    private javax.swing.JCheckBox checkH11;
+    private javax.swing.JCheckBox checkH12;
+    private javax.swing.JCheckBox checkH13;
+    private javax.swing.JCheckBox checkH14;
+    private javax.swing.JCheckBox checkH15;
+    private javax.swing.JCheckBox checkH2;
+    private javax.swing.JCheckBox checkH3;
+    private javax.swing.JCheckBox checkH4;
+    private javax.swing.JCheckBox checkH5;
+    private javax.swing.JCheckBox checkH6;
+    private javax.swing.JCheckBox checkH7;
+    private javax.swing.JCheckBox checkH8;
+    private javax.swing.JCheckBox checkH9;
     private javax.swing.JComboBox<String> comboDisciplina1;
     private javax.swing.JComboBox<String> comboDisciplina2;
     private javax.swing.JComboBox<String> comboDisciplina3;
     private javax.swing.JComboBox<String> comboDisciplina4;
     private javax.swing.JComboBox<String> comboDisciplina5;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox13;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -627,6 +1043,7 @@ public class AddProfessor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JComboBox<String> qtdePref;
+    private javax.swing.JTextField textMatricula;
     private javax.swing.JTextField textNome;
     // End of variables declaration//GEN-END:variables
 }

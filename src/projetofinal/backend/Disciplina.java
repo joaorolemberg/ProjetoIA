@@ -1,6 +1,7 @@
 package projetofinal.backend;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Disciplina implements Serializable {
     public String getNome() {
@@ -28,7 +29,8 @@ public class Disciplina implements Serializable {
     }
     
     public void printAll(){
-        System.out.println("Nome: "+ this.nome+"\tDepartamento: "+this.departamento+"\tCréditos: "+this.creditos);
+        System.out.println("Codigo:"+this.getCodigo()+"\tNome: "+ this.nome+"\tDepartamento: "+this.departamento+"\tCréditos: "+this.creditos);
+        System.out.println("Horario pre definido:"+this.restricaoHorario);
         
     }
 
@@ -40,10 +42,17 @@ public class Disciplina implements Serializable {
         this.codigo = codigo;
     }
 
-    
+    public List<String> getRestricaoHorario() {
+        return restricaoHorario;
+    }
+
+    public void setRestricaoHorario(List<String> restricaoHorario) {
+        this.restricaoHorario = restricaoHorario;
+    }
     
     private String nome;
     private int creditos;
     private String codigo;
     private String departamento;
+    private List<String> restricaoHorario;
 }

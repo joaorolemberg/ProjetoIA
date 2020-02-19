@@ -5,8 +5,13 @@
  */
 package projetofinal.frontend;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import projetofinal.backend.*;
+import static projetofinal.backend.ManipulaArquivo.leitorDisciplina;
+import static projetofinal.backend.ManipulaArquivo.leitorProfessor;
 
 /**
  *
@@ -17,10 +22,13 @@ public class Gui extends javax.swing.JFrame {
     /**
      * Creates new form Gui
      */
-    static List<Disciplina> disciplina;
-    public Gui(List<Disciplina> disciParam) {
+    static List<Disciplina> disciplinas;
+    static List<Professor> professores;
+    
+    public Gui() throws IOException {
         initComponents();
-        disciplina=disciParam;
+        disciplinas=leitorDisciplina("src/projetofinal/disciplinas.txt");
+        professores=leitorProfessor("src/projetofinal/ProfessorObj.txt");
         this.setLocationRelativeTo(null);
     }
 
@@ -128,13 +136,16 @@ public class Gui extends javax.swing.JFrame {
     private void btnAddDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDisciplinaActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new AddDisciplina(disciplina).setVisible(true);
+        new AddDisciplina().setLocationRelativeTo(null);
+        
     }//GEN-LAST:event_btnAddDisciplinaActionPerformed
 
     private void btnAddProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProfessorActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new AddProfessor(disciplina).setVisible(true);
+        new AddProfessor(disciplinas).setLocationRelativeTo(null);
+        
+        
         
         
     }//GEN-LAST:event_btnAddProfessorActionPerformed
@@ -169,7 +180,11 @@ public class Gui extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Gui(disciplina).setVisible(true);
+                try {
+                    new Gui().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
