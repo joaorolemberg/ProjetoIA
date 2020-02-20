@@ -20,7 +20,8 @@ public class AlocarDisciplina extends javax.swing.JFrame {
     /**
      * Creates new form AlocarDisciplina
      */
-    static List<String> horariosInst=new ArrayList<>();
+    List<String> horariosInst=new ArrayList<>();
+    
     static List<Disciplina> disciplinas;
     static List<Professor> professores;
     
@@ -610,6 +611,7 @@ public class AlocarDisciplina extends javax.swing.JFrame {
             JOptionPane.showMessageDialog( null , " Campo codigo nulo" , " Erro!" , JOptionPane.WARNING_MESSAGE );
         }else{
             int n=disciplinas.size();
+            
             for (int i = 0; i < n; i++) {
                 
                 if(textTemp.equalsIgnoreCase(disciplinas.get(i).getCodigo())){
@@ -637,9 +639,42 @@ public class AlocarDisciplina extends javax.swing.JFrame {
         if(horariosInst.size()*2>discTemp.getCreditos()){
             JOptionPane.showMessageDialog( null , " Horario pre-definido maior que carga horaria" , " Erro!" , JOptionPane.WARNING_MESSAGE );
         }else{
-             discTemp.setRestricaoHorario(horariosInst);
-             instanciaDisc.add(discTemp);
-             JOptionPane.showMessageDialog( null , " Disciplina adicionada" , " Adicionada" , JOptionPane.INFORMATION_MESSAGE );
+            
+             boolean igual=false;
+             int k=instanciaDisc.size();
+             int o=horariosInst.size();
+             
+             for (int i = 0; i < k; i++) {
+                 
+                 int z=instanciaDisc.get(i).getRestricaoHorario().size();
+                 
+                 for (int j = 0; j < z; j++) {        
+                     
+                     for (int l = 0; l < o; l++) {
+                         if(instanciaDisc.get(i).getRestricaoHorario().get(j).equals(horariosInst.get(l))){
+                             JOptionPane.showMessageDialog( null , " Horario pre-definido requisitado por outra disciplina" , " Erro!" , JOptionPane.WARNING_MESSAGE );
+                             igual=true;
+                             break;
+                         }
+                     }
+                     if(igual==true)
+                                break;
+                 }
+                if(igual==true)
+                       break;
+            }
+             if(igual==false){
+                           
+            List<String> horariosTemp=new ArrayList<>();
+            int n = horariosInst.size();
+            for (int i = 0; i < n; i++) {
+               horariosTemp.add(horariosInst.get(i));
+            }
+            discTemp.setRestricaoHorario(horariosTemp);
+            instanciaDisc.add(discTemp);
+            JOptionPane.showMessageDialog ( null , " Disciplina adicionada" , " Adicionada" , JOptionPane.INFORMATION_MESSAGE );
+            }
+             
              
         }
     }//GEN-LAST:event_btnAddDiscInstActionPerformed

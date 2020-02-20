@@ -16,5 +16,7 @@ public class DisciplinasCSP extends CSP<Variable, Disciplina> {
 
         for (Variable var : getVariables())
             setDomain(var, positions);
+
+
     }
 }

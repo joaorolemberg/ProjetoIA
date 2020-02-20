@@ -2,22 +2,31 @@ package projetofinal.backend;
 
 import projetofinal.aima.CSP;
 import projetofinal.aima.Domain;
+import projetofinal.aima.MaxMateriasConstraint;
 import projetofinal.aima.Variable;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class HorariosCSP extends CSP<Variable, Integer> {
-    public HorariosCSP(List<Disciplina> disciplinas) {
-        for (Disciplina disciplina : disciplinas)
-            addVariable(new Variable(disciplina.getNome()));
+import java.util.*;
 
-        List<Integer> horarios = new ArrayList<>();
+public class HorariosCSP extends CSP<Variable, String> {
 
-        for(int i = 1; i <= 15; i++) horarios.add(i);
-        Domain<Integer> positions = new Domain<>(horarios);
+    public HorariosCSP(List<Variable> variables, List<String> domains) {
+        super(variables);
 
+        Domain<String> d = new Domain<>(domains);
         for (Variable var : getVariables())
-            setDomain(var, positions);
+            setDomain(var, d);
+
+        for(int i = 0; i < getVariables().size(); i++){
+            Variable var1 = getVariables().get(i);
+            for(int j = i+1; j < getVariables().size(); j++){
+                Variable var2 = getVariables().get(j);
+                for(int k = j+1; k < getVariables().size(); k++){
+                    Variable var3 = getVariables().get(k);
+                    addConstraint(new MaxMateriasConstraint<>(var1,var2,var3));
+                }
+
+            }
+        }
     }
 }

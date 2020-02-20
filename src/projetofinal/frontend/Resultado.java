@@ -25,13 +25,22 @@ public class Resultado extends javax.swing.JFrame {
     static List<Disciplina>  instanciaDisc;
     static List<Professor> instanciaProf;
     
-    public Resultado(List<Disciplina> discParam,List<Professor> profParam,List<Disciplina> discInst ,List<Professor> profInst) {
+    static List<String> resultadoAlocacao;
+    static List<String> profsNaoAlocados;
+    static List<String> materiasNaoAlocadas;
+    
+    public Resultado(List<Disciplina> discParam,List<Professor> profParam,List<Disciplina> discInst ,List<Professor> profInst,List<String> resultParam,List<String> profNotParam,List<String> matNotParam) {
         initComponents();
         this.setVisible(true);
         disciplinas=discParam;
         professores=profParam;
         instanciaDisc=discInst;
         instanciaProf=profInst;
+        resultadoAlocacao=resultParam;
+        profsNaoAlocados=profNotParam;
+        materiasNaoAlocadas=matNotParam;
+        
+        
         
         //Segunda 
         tabela.setValueAt("h1", 0, 1);
@@ -61,6 +70,8 @@ public class Resultado extends javax.swing.JFrame {
         
         
         
+        
+        
     }
 
     /**
@@ -77,11 +88,11 @@ public class Resultado extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        listProfResultado = new javax.swing.JList<>();
+        listNotProf = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        listProfResultado1 = new javax.swing.JList<>();
+        listMatNot = new javax.swing.JList<>();
         btnVoltarResult = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -111,7 +122,7 @@ public class Resultado extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Resultado");
 
-        jScrollPane3.setViewportView(listProfResultado);
+        jScrollPane3.setViewportView(listNotProf);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setText("Professores nao alocados");
@@ -119,7 +130,7 @@ public class Resultado extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel3.setText("Disciplinas nao alocadas");
 
-        jScrollPane4.setViewportView(listProfResultado1);
+        jScrollPane4.setViewportView(listMatNot);
 
         btnVoltarResult.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnVoltarResult.setText("Voltar");
@@ -231,7 +242,7 @@ public class Resultado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Resultado(disciplinas,professores,instanciaDisc,instanciaProf).setVisible(true);
+                new Resultado(disciplinas,professores,instanciaDisc,instanciaProf,resultadoAlocacao,profsNaoAlocados,materiasNaoAlocadas).setVisible(true);
             }
         });
     }
@@ -245,8 +256,8 @@ public class Resultado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JList<String> listProfResultado;
-    private javax.swing.JList<String> listProfResultado1;
+    private javax.swing.JList<String> listMatNot;
+    private javax.swing.JList<String> listNotProf;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

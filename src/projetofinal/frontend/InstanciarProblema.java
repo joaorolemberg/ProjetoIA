@@ -6,11 +6,19 @@
 package projetofinal.frontend;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import projetofinal.aima.Assignment;
+import projetofinal.aima.CSP;
+import projetofinal.aima.CspListener;
+import projetofinal.aima.CspSolver;
+import projetofinal.aima.Variable;
 import projetofinal.backend.Disciplina;
+import projetofinal.backend.HorariosCSP;
 import projetofinal.backend.Professor;
 
 /**
@@ -27,6 +35,8 @@ public class InstanciarProblema extends javax.swing.JFrame {
     
     static List<Disciplina>  instanciaDisc;
     static List<Professor> instanciaProf;
+    
+    
     
     public InstanciarProblema(List<Disciplina> discParam,List<Professor> profParam,List<Disciplina> discInst ,List<Professor> profInst) {
         initComponents();
@@ -47,7 +57,7 @@ public class InstanciarProblema extends javax.swing.JFrame {
             modelDisciplina.addElement("Nome: "+ instanciaDisc.get(i).getNome());
             modelDisciplina.addElement("Departamento: "+instanciaDisc.get(i).getDepartamento());
             modelDisciplina.addElement("Créditos: "+instanciaDisc.get(i).getCreditos());
-            modelDisciplina.addElement("Horarios Indis.:"+instanciaDisc.get(i).getRestricaoHorario());
+            modelDisciplina.addElement("Horarios Fixos:"+instanciaDisc.get(i).getRestricaoHorario());
             modelDisciplina.addElement("*****************************************************************");
             
             }
@@ -233,11 +243,52 @@ public class InstanciarProblema extends javax.swing.JFrame {
 
     private void btnExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecutarActionPerformed
         // TODO add your handling code here:
+        
         //executar codigo de csp e chamar tela com resultado
-        System.out.println(instanciaDisc);
-        instanciaProf.get(0).printAll();
+        //Recebe disciplinas como variaveis
+        
+        int tamDisc=instanciaDisc.size();
+        List<Variable> varDisc= new ArrayList<>();
+        for (int i = 0; i < tamDisc; i++) {
+            Variable temp = new Variable(instanciaDisc.get(i).getNome());
+            //System.out.println(instanciaDisc.get(i).getNome());
+            varDisc.add(temp);
+        }
+        
+        //recebe nome dos professores como string
+        ArrayList<String> strProf=new ArrayList<>();
+        int tamProf=instanciaProf.size();
+        
+        for (int i = 0; i < tamProf; i++) {
+            strProf.add(instanciaProf.get(i).getNome());
+            //System.out.println(instanciaDisc.get(i).getNome());
+        }
+       
+        CSP<Variable,String> csp=new HorariosCSP(varDisc,strProf);
+        CspListener.StepCounter<Variable,String> stepCounter = new CspListener.StepCounter<>();
+        CspSolver<Variable,String> solver;
+        Optional<Assignment<Variable,String>> solution;
+        /*
+        List<List<String>> preferencias;
+        for (int i = 0; i < tamDisc; i++) {
+            
+            for (int j = 0; j < 10; j++) {
+                List<String> materia
+            }
+            
+        }
+        */
+        
+        
+        List<String> resultadoAlocacao=null;
+        List<String> profsNaoAlocados=null;
+        List<String> materiasNaoAlocadas=null;
+        
+        
+        
+        
         this.dispose();
-        new Resultado(disciplinas,professores,instanciaDisc,instanciaProf).setLocationRelativeTo(null);
+        new Resultado(disciplinas,professores,instanciaDisc,instanciaProf,resultadoAlocacao,profsNaoAlocados,materiasNaoAlocadas).setLocationRelativeTo(null);
         
     }//GEN-LAST:event_btnExecutarActionPerformed
 
