@@ -28,10 +28,11 @@ public class restricaoturma extends CSP<Variable, String> {
             for(int j = k+1; j < contador; j++){
                 Variable var2 = materias[j];
                 Variable varaux2=professores[k];
+                /*
                 if(addConstraint(new restriturma(var1, var2))){
                     addConstraint(new restriturma(varaux, varaux2));
                 }
-
+                */
             }
         }
 

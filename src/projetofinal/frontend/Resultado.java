@@ -6,6 +6,7 @@
 package projetofinal.frontend;
 
 import java.util.List;
+import javax.swing.DefaultListModel;
 import projetofinal.backend.Disciplina;
 import projetofinal.backend.Professor;
 
@@ -25,11 +26,11 @@ public class Resultado extends javax.swing.JFrame {
     static List<Disciplina>  instanciaDisc;
     static List<Professor> instanciaProf;
     
-    static List<String> resultadoAlocacao;
+    static String[]resultadoAlocacao;
     static List<String> profsNaoAlocados;
     static List<String> materiasNaoAlocadas;
     
-    public Resultado(List<Disciplina> discParam,List<Professor> profParam,List<Disciplina> discInst ,List<Professor> profInst,List<String> resultParam,List<String> profNotParam,List<String> matNotParam) {
+    public Resultado(List<Disciplina> discParam,List<Professor> profParam,List<Disciplina> discInst ,List<Professor> profInst,String[] resultParam,List<String> profNotParam,List<String> matNotParam) {
         initComponents();
         this.setVisible(true);
         disciplinas=discParam;
@@ -43,31 +44,61 @@ public class Resultado extends javax.swing.JFrame {
         
         
         //Segunda 
-        tabela.setValueAt("h1", 0, 1);
-        tabela.setValueAt("h2", 1, 1);
-        tabela.setValueAt("h3", 2, 1);
+        tabela.setValueAt(resultadoAlocacao[0], 0, 1);
+        tabela.setValueAt(resultadoAlocacao[1], 1, 1);
+        tabela.setValueAt(resultadoAlocacao[2], 2, 1);
         
         //Terca
-        tabela.setValueAt("h4", 0, 2);
-        tabela.setValueAt("h5", 1, 2);
-        tabela.setValueAt("h6", 2, 2);
+        tabela.setValueAt(resultadoAlocacao[3], 0, 2);
+        tabela.setValueAt(resultadoAlocacao[4], 1, 2);
+        tabela.setValueAt(resultadoAlocacao[5], 2, 2);
         
         //Quarta
-        tabela.setValueAt("h7", 0, 3);
-        tabela.setValueAt("h8", 1, 3);
-        tabela.setValueAt("h9", 2, 3);
+        tabela.setValueAt(resultadoAlocacao[6], 0, 3);
+        tabela.setValueAt(resultadoAlocacao[7], 1, 3);
+        tabela.setValueAt(resultadoAlocacao[8], 2, 3);
         
         //Quinta
-        tabela.setValueAt("h10", 0, 4);
-        tabela.setValueAt("h11", 1, 4);
-        tabela.setValueAt("h12", 2, 4);
+        tabela.setValueAt(resultadoAlocacao[9], 0, 4);
+        tabela.setValueAt(resultadoAlocacao[10], 1, 4);
+        tabela.setValueAt(resultadoAlocacao[11], 2, 4);
         
         //Sexta
-        tabela.setValueAt("h13", 0, 5);
-        tabela.setValueAt("h14", 1, 5);
-        tabela.setValueAt("h15", 2, 5);
+        tabela.setValueAt(resultadoAlocacao[12], 0, 5);
+        tabela.setValueAt(resultadoAlocacao[13], 1, 5);
+        tabela.setValueAt(resultadoAlocacao[14], 2, 5);
+        
+        listProfNot.removeAll();
+        listMatNot.removeAll();
         
         
+        DefaultListModel modelDiscNot = new DefaultListModel();
+        if(materiasNaoAlocadas!=null){
+            int n = materiasNaoAlocadas.size();
+            for (int i=0; i<n; i++) {
+            
+            modelDiscNot.addElement("Nome: "+ materiasNaoAlocadas.get(i));
+            modelDiscNot.addElement("******************************************************************");
+            
+            }
+            listMatNot.setModel(modelDiscNot);
+        
+        }
+        
+        DefaultListModel modelProfNot = new DefaultListModel();
+        if(profsNaoAlocados!=null){
+            int n = profsNaoAlocados.size();
+            
+            for (int i=0; i<n; i++) {
+
+                
+                modelProfNot.addElement("Nome:"+profsNaoAlocados.get(i));
+               
+            
+                modelProfNot.addElement("***************************************************************");  
+            }
+            listProfNot.setModel(modelProfNot);
+        }
         
         
         
@@ -88,7 +119,7 @@ public class Resultado extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        listNotProf = new javax.swing.JList<>();
+        listProfNot = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -122,7 +153,7 @@ public class Resultado extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Resultado");
 
-        jScrollPane3.setViewportView(listNotProf);
+        jScrollPane3.setViewportView(listProfNot);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setText("Professores nao alocados");
@@ -257,7 +288,7 @@ public class Resultado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList<String> listMatNot;
-    private javax.swing.JList<String> listNotProf;
+    private javax.swing.JList<String> listProfNot;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

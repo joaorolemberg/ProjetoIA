@@ -280,11 +280,19 @@ public class InstanciarProblema extends javax.swing.JFrame {
         */
         
         
-        List<String> resultadoAlocacao=null;
-        List<String> profsNaoAlocados=null;
-        List<String> materiasNaoAlocadas=null;
+        String[] resultadoAlocacao={"h1","h2","h3","h4","h5","h6","h7","h8","h9","h10","h11","h12","h13","h14","h15"};
         
         
+        List<String> profsNaoAlocados=new ArrayList<>();
+        List<String> materiasNaoAlocadas=new ArrayList<>();
+        
+        profsNaoAlocados.add("prof1");
+        profsNaoAlocados.add("prof2");
+        profsNaoAlocados.add("prof3");
+        
+        materiasNaoAlocadas.add("mat1");
+        materiasNaoAlocadas.add("mat2");
+        materiasNaoAlocadas.add("mat3");
         
         
         this.dispose();
